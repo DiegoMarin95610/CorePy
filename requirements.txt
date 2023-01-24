@@ -1,0 +1,8 @@
+django==3.2.16
+django-environ==0.9.0   #encriptacion
+django-cors-headers==3.13.0   #comunicacion frontend y backend, control de accesos de la api
+djangorestframework==3.14.0   #Permite crear API con django
+Pillow==9.4.0   #Utilizar imagenes en django
+django-storages==1.13.2   #Guardar imagenes en abss
+django-ckeditor==6.5.1   #Crear contenido de manera mas rica
+psycopg2==2.9.5   #Conecta base de datos postgress

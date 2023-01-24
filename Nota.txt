@@ -1,0 +1,1 @@
+Del gitignore se comenta build, nos aseguramos de tener .env activo ya que este no puede ser compartido
