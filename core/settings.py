@@ -20,8 +20,13 @@ DEBUG = os.environ.get('DEBUG')
 
 ALLOWED_HOSTS = env.list('ALLOWED_HOSTS_DEV')
 
+# En las anteriores lineas de codigo se crearon variable en el archivo .env para poder ocultarlas del documento esto con el fin de proteger mejor la informacion importante de nuesto software, esto hace parte de la seguridad informatica.
 
 # Application definition
+
+
+
+#Aqui se separan las aplicaciones por categorias para saber que apps usa cada una de las herramientas.
 DJANGO_APPS = [
     'django.contrib.admin',
     'django.contrib.auth',
@@ -42,8 +47,11 @@ THIRD_PARTY_APPS = [
     'ckeditor_uploader'
 ]
 
+#Aqui se realiza el conunto de las apps.
 INSTALLED_APPS = DJANGO_APPS + PROJECT_APPS + THIRD_PARTY_APPS
 
+
+#Configuracion del CKEDITOR
 CKEDITOR_CONFIGS = {
     'awesome_ckeditor': {
         'toolbar': 'Custom',
@@ -58,10 +66,12 @@ CKEDITOR_CONFIGS = {
 }
 CKEDITOR_UPLOAD_PATH = "/media/"
 
+
+#Es un intermediaro entre apis
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
-    "corsheaders.middleware.CorsMiddleware",
+    'corsheaders.middleware.CorsMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
@@ -87,12 +97,16 @@ TEMPLATES = [
     },
 ]
 
+
+#WSGI Hacer referencia a los procesos sincronicos.
 WSGI_APPLICATION = 'core.wsgi.application'
 
 
 # Database
 # https://docs.djangoproject.com/en/3.2/ref/settings/#databases
 
+
+#Este es el manejador de bases de datos
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.sqlite3',
@@ -123,6 +137,8 @@ AUTH_PASSWORD_VALIDATORS = [
 # Internationalization
 # https://docs.djangoproject.com/en/3.2/topics/i18n/
 
+
+#Aqui configuramos el idioma y el acotejamiento para caracteres especiales del español
 LANGUAGE_CODE = 'es'
 
 TIME_ZONE = 'UTC-5'
@@ -136,11 +152,18 @@ USE_TZ = True
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/3.2/howto/static-files/
+
+
+
+#Donde se guardan los archivos estaticos
 STATIC_ROOT = os.path.join(BASE_DIR, 'static')
 STATIC_URL = '/static/'
 
+
+#Donde se guarda la multimedia
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 MEDIA_URL = '/media/'
+
 
 STATICFILES_DIRS = [
     os.path.join(BASE_DIR, 'build/static')
@@ -150,17 +173,29 @@ STATICFILES_DIRS = [
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
+
+#Para determinar quien puede acceder a la informacion de la api que se esta creando.
 REST_FRAMEWORK = {
     'DEFAULT_PERMISSION_CLASSES': [
         'rest_framework.permissions.IsAuthenticatedOrReadOnly',
     ]
 }
 
+CORS_ALLOWED_ORIGINS = env.list('CORS_ALLOWED_ORIGINS_DEV')
+
+CSRF_TRUSTED_ORIGINS = env.list('CSRF_TRUSTED_ORIGINS_DEV')
+
+EMAIL_BACKEND='django.core.mail.backends.console.EmailBackend'
 
 
+#Se activa en el momento en que la aplicacion pasa a produccion.
 if not DEBUG:
     ALLOWED_HOSTS=env.list('ALLOWED_HOSTS_DEPLOY')
     DATABASES = {
     'default': env.db("DATABASE_URL"),
     }
     DATABASES["default"]["ATOMIC_REQUESTS"] = True
+    CORS_ALLOWED_ORIGINS = env.list('CORS_ALLOWED_ORIGINS_DEPLOY')
+    CSRF_TRUSTED_ORIGINS = env.list('CSRF_TRUSTED_ORIGINS_DEPLOY')
+    
+    
