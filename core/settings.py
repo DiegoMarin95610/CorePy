@@ -81,6 +81,7 @@ MIDDLEWARE = [
 
 ROOT_URLCONF = 'core.urls'
 
+#Debemos correr python manage.py collectstatic
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
