@@ -12,5 +12,6 @@ urlpatterns = [
 #^ afirma la posición al principio de una línea
 # . coincide con cualquier carácter (excepto terminadores de línea)
 # * coincide con el token anterior entre cero e ilimitadas veces, tantas veces como sea posible, devolviendo lo necesario
+
 #indicamos la vista que vamos a traer que en este caso es el index de la app de react.
 urlpatterns += [re_path(r'^.*', TemplateView.as_view(template_name='index.html'))]
